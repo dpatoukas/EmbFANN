@@ -1,0 +1,1 @@
+"./main.obj" "./src/fann.obj" "./src/fann_cascade.obj" "./src/fann_error.obj" "./src/fann_io.obj" "./src/fann_train.obj" "./src/fann_train_data.obj" "../lnk_msp430fr5994.cmd" -llibmath.a -llibc.a 
