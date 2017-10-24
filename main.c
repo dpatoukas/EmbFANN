@@ -2,19 +2,13 @@
 #include <stdio.h>
 #include "src/include/fixedfann.h"
 
+#define DEBUG 1
 
-int main(void)
-{
-    WDTCTL = WDTPW | WDTHOLD;   // stop watchdog timer
-
-    P1DIR = 0X41;    //Declare PIN0 AND PIN1 OF PORT 1 AS OUTPUT
-
-    P1OUT = 0X01;   //MAKE PIN0 HIGH AND PIN1 LOW INITIALLY
-
-    
+int mspFanntest(){
     /*Initialize*/
     int8_t i;
     int8_t ret = 0;
+    int8_t success = 0;
 
     fann_type *calc_out;
     fann_type error_d;
@@ -57,7 +51,7 @@ int main(void)
         }else{
 
             //Test Success 
-            P1OUT ^=0X41;
+            success++;
 
         }
        }
@@ -66,6 +60,18 @@ int main(void)
     fann_destroy_train(data);
     fann_destroy(ann);
 
+
     return ret;
 
+}
+
+int main(void)
+{
+    WDTCTL = WDTPW | WDTHOLD;   // stop watchdog timer
+
+
+    while(!mspFanntest()){
+        __no_operation();
+    }
+    return;
 }

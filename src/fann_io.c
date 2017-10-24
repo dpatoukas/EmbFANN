@@ -132,6 +132,13 @@ struct fann *fann_create_XOR()
         {5, 28073},
         {6, -20577}
     };
+
+    /*
+    * Layer Sizes
+    */
+    uint8_t layer_size_store[] = {L1, L2, L3};
+    uint8_t layer_size;
+    
     
     ann = fann_allocate_structure(num_layers);
         if(ann == NULL)
@@ -166,8 +173,7 @@ struct fann *fann_create_XOR()
     ann->cascade_min_cand_epochs = CASCADE_MIN_CAND_EPOCH;
     ann->cascade_num_candidate_groups = CASCADE_NUM_CAND_GROUPS;
     ann->bit_fail_limit = BIT_FAIL_LIMIT;
-    //Bit size limitation
-    //Does it play a role
+    //Platform size limitation
     //ann->cascade_candidate_limit = 8192000;
     ann->cascade_candidate_limit = CASCADE_CAND_LIMIT;
     ann->cascade_weight_multiplier = CASCADE_WEIGHT_MULT;
@@ -188,7 +194,6 @@ struct fann *fann_create_XOR()
     }
 
     uint8_t cascade_activation_functions[]= {CAF_1, CAF_2, CAF_3, CAF_4, CAF_5, CAF_6, CAF_7, CAF_8, CAF_9, CAF_10};
-    //int i;
     for (i = 0; i < ann->cascade_activation_functions_count; i++)
     {
         ann->cascade_activation_functions[i] =(enum fann_activationfunc_enum)cascade_activation_functions[i];
@@ -212,11 +217,6 @@ struct fann *fann_create_XOR()
 
     fann_update_stepwise(ann);
 
-    /*
-    * Layer Sizes
-    */
-    uint8_t layer_size_store[] = {L1, L2, L3};
-    uint8_t layer_size;
     i=0;
 
     for(layer_it = ann->first_layer; layer_it != ann->last_layer; layer_it++)
