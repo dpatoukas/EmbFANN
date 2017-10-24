@@ -7,6 +7,7 @@ SHELL = cmd.exe
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
 ../src/fann.c \
+../src/fann_cascade.c \
 ../src/fann_error.c \
 ../src/fann_io.c \
 ../src/fann_train.c \
@@ -14,6 +15,7 @@ C_SRCS += \
 
 C_DEPS += \
 ./src/fann.d \
+./src/fann_cascade.d \
 ./src/fann_error.d \
 ./src/fann_io.d \
 ./src/fann_train.d \
@@ -21,6 +23,7 @@ C_DEPS += \
 
 OBJS += \
 ./src/fann.o \
+./src/fann_cascade.o \
 ./src/fann_error.o \
 ./src/fann_io.o \
 ./src/fann_train.o \
@@ -28,6 +31,7 @@ OBJS += \
 
 OBJS__QUOTED += \
 "src\fann.o" \
+"src\fann_cascade.o" \
 "src\fann_error.o" \
 "src\fann_io.o" \
 "src\fann_train.o" \
@@ -35,6 +39,7 @@ OBJS__QUOTED += \
 
 C_DEPS__QUOTED += \
 "src\fann.d" \
+"src\fann_cascade.d" \
 "src\fann_error.d" \
 "src\fann_io.d" \
 "src\fann_train.d" \
@@ -42,6 +47,7 @@ C_DEPS__QUOTED += \
 
 C_SRCS__QUOTED += \
 "../src/fann.c" \
+"../src/fann_cascade.c" \
 "../src/fann_error.c" \
 "../src/fann_io.c" \
 "../src/fann_train.c" \

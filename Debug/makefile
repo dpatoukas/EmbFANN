@@ -12,6 +12,7 @@ GEN_CMDS__FLAG :=
 ORDERED_OBJS += \
 "./main.o" \
 "./src/fann.o" \
+"./src/fann_cascade.o" \
 "./src/fann_error.o" \
 "./src/fann_io.o" \
 "./src/fann_train.o" \
@@ -143,11 +144,11 @@ BIN_OUTPUTS__QUOTED += \
 
 
 # All Target
-all: $(OBJS) $(LD_SRCS) $(GEN_CMDS)
+all: $(OBJS) $(CMD_SRCS) $(LD_SRCS) $(GEN_CMDS)
 	@$(MAKE) --no-print-directory -Onone "mspFANN.out"
 
 # Tool invocations
-mspFANN.out: $(OBJS) $(LD_SRCS) $(GEN_CMDS)
+mspFANN.out: $(OBJS) $(CMD_SRCS) $(LD_SRCS) $(GEN_CMDS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: GNU Linker'
 	"C:/ti/ccsv7/tools/compiler/msp430-gcc-6.2.1.16_win32/bin/msp430-elf-gcc.exe" -Os -g -gdwarf-3 -gstrict-dwarf -Wall -mhwmult=f5series -mcode-region=none -mdata-region=none -mlarge -Wl,-Map,"mspFANN.map" -Wl,--gc-sections -L"C:/ti/ccsv7/ccs_base/msp430/include_gcc" -o"mspFANN.out" $(ORDERED_OBJS)
@@ -163,8 +164,8 @@ mspFANN.hex: $(EXE_OUTPUTS)
 # Other Targets
 clean:
 	-$(RM) $(BIN_OUTPUTS__QUOTED)$(EXE_OUTPUTS__QUOTED)
-	-$(RM) "main.o" "src\fann.o" "src\fann_error.o" "src\fann_io.o" "src\fann_train.o" "src\fann_train_data.o" 
-	-$(RM) "main.d" "src\fann.d" "src\fann_error.d" "src\fann_io.d" "src\fann_train.d" "src\fann_train_data.d" 
+	-$(RM) "main.o" "src\fann.o" "src\fann_cascade.o" "src\fann_error.o" "src\fann_io.o" "src\fann_train.o" "src\fann_train_data.o" 
+	-$(RM) "main.d" "src\fann.d" "src\fann_cascade.d" "src\fann_error.d" "src\fann_io.d" "src\fann_train.d" "src\fann_train_data.d" 
 	-@echo 'Finished clean'
 	-@echo ' '
 

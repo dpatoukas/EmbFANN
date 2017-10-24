@@ -1,7 +1,7 @@
 ******************************************************************************
                   MSP430 Linker PC v16.9.4                     
 ******************************************************************************
->> Linked Mon Oct 23 21:53:23 2017
+>> Linked Tue Oct 24 19:40:50 2017
 
 OUTPUT FILE NAME:   <mspFANN.out>
 ENTRY POINT SYMBOL: "_c_int00_noargs"  address: 00005400
@@ -151,15 +151,15 @@ section   page    origin      length       input sections
 
 .const     0    00005424    000005dd     
                   00005424    00000488     fann_error.obj (.const:.string)
-                  000058ac    00000068     fann_io.obj (.const:$P$T4$5)
+                  000058ac    00000068     fann_io.obj (.const:$P$T1$2)
                   00005914    0000005e     fann.obj (.const:.string)
-                  00005972    00000036     fann_io.obj (.const:$P$T3$4)
+                  00005972    00000036     fann_io.obj (.const:$P$T0$1)
                   000059a8    00000020     fann_train_data.obj (.const:$P$T0$1)
                   000059c8    00000014     rts430x_lc_rd_eabi.lib : _printfi_min.obj (.const:.string)
                   000059dc    00000010     fann_train_data.obj (.const:$P$T1$2)
-                  000059ec    0000000a     fann_io.obj (.const:.string:$P$T0$1)
-                  000059f6    00000008     fann_io.obj (.const:$P$T1$2)
-                  000059fe    00000003     fann_io.obj (.const:.string:$P$T2$3)
+                  000059ec    0000000a     fann_io.obj (.const:.string:$P$T2$3)
+                  000059f6    00000008     fann_io.obj (.const:$P$T3$4)
+                  000059fe    00000003     fann_io.obj (.const:.string:$P$T4$5)
 
 $fill000   0    0000ff80    00000004     
                   0000ff80    00000004     --HOLE-- [fill = ffff]

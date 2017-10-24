@@ -1,1 +1,1 @@
-"./main.o" "./src/fann.o" "./src/fann_error.o" "./src/fann_io.o" "./src/fann_train.o" "./src/fann_train_data.o" -T"../msp430fr5994.ld" -Wl,--start-group -lgcc -lc -Wl,--end-group 
+"./main.o" "./src/fann.o" "./src/fann_cascade.o" "./src/fann_error.o" "./src/fann_io.o" "./src/fann_train.o" "./src/fann_train_data.o" -T"../msp430fr5994.ld" -Wl,--start-group -lgcc -lc -Wl,--end-group 
