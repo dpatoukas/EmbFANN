@@ -4,6 +4,7 @@
 // *  Created on: Oct 23, 2017
 // *      Author: patou
 // */
+#define DECIMAL_POINT       13
 #define NUM_LAYERS          3
 #define LEARNING_RATE       0.700
 #define CONNECTION_RATE     1.00
@@ -73,7 +74,8 @@
 #include <string.h>
 #include <stdint.h>
 
-/* Create a network for XOR.
+/**
+ * Create a network for XOR.
  */
 FANN_EXTERNAL struct fann *FANN_API fann_create_from_static()
 {
@@ -84,11 +86,13 @@ FANN_EXTERNAL struct fann *FANN_API fann_create_from_static()
     return ann;
 }
 
-/* INTERNAL FUNCTION
-*   Create a network from static variables
-*Values can be found on the XOR example folder(.net file)
-*Just replaced file scraping with declarations
-*TODO: Add a header file with all the declaration to increase usability?
+/**
+ * INTERNAL FUNCTION
+ * Create a network from static variables
+ * Values can be found on the XOR example folder (.net file)
+ * Just replaced file scraping with declarations
+ *
+ * TODO: Add a header file with all the declaration to increase usability?
  */
 struct fann *fann_create_XOR()
 {
@@ -103,7 +107,7 @@ struct fann *fann_create_XOR()
     struct fann_layer *layer_it;
     struct fann *ann = NULL;
 
-    /*Neurons as found on the .net file*/
+    /* Neurons as found on the .net file. */
     uint16_t neurons[9][3] = {
         {0, 0, 0},
         {0, 0, 0},
@@ -116,7 +120,7 @@ struct fann *fann_create_XOR()
         {0, 5, 8192}
     };
 
-    /*Connections as found on the .net file*/
+    /* Connections as found on the .net file. */
     int32_t connections[13][2] ={
         {0, -1921},
         {1, -2261},
@@ -133,23 +137,21 @@ struct fann *fann_create_XOR()
         {6, -20577}
     };
 
-    /*
-    * Layer Sizes
-    */
+    /* Layer Sizes. */
     uint8_t layer_size_store[] = {L1, L2, L3};
     uint8_t layer_size;
     
-    
     ann = fann_allocate_structure(num_layers);
-        if(ann == NULL)
-    {
+    if (ann == NULL) {
         return NULL;
     }
 
+    ann->decimal_point = DECIMAL_POINT;
+    ann->multiplier = 1 << DECIMAL_POINT;
     ann->learning_rate = NUM_LAYERS;
     ann->connection_rate = LEARNING_RATE;
 
-    //network_type
+    /* Network_type. */
     ann->network_type = (enum fann_nettype_enum)NETWORK_TYPE;
     ann->learning_momentum = LEARNING_MOMENTUM;
     ann->training_algorithm = (enum fann_train_enum)TRAINING_ALGORITHM;
@@ -179,84 +181,76 @@ struct fann *fann_create_XOR()
     ann->cascade_weight_multiplier = CASCADE_WEIGHT_MULT;
 
     /*
-    *Activation function
-    */
+     * Activation function.
+     */
     ann->cascade_activation_functions_count = CASCADE_ACTIV_FUNC_COUNT;
-    /* reallocate mem */
+    // Reallocate memory
     ann->cascade_activation_functions =
-        (enum fann_activationfunc_enum *)realloc(ann->cascade_activation_functions,
+        (enum fann_activationfunc_enum *) realloc(ann->cascade_activation_functions,
         ann->cascade_activation_functions_count * sizeof(enum fann_activationfunc_enum));
-    if(ann->cascade_activation_functions == NULL)
-    {
+
+    if (ann->cascade_activation_functions == NULL) {
         fann_error((struct fann_error*)ann, FANN_E_CANT_ALLOCATE_MEM);
         fann_destroy(ann);
         return NULL;
     }
 
-    uint8_t cascade_activation_functions[]= {CAF_1, CAF_2, CAF_3, CAF_4, CAF_5, CAF_6, CAF_7, CAF_8, CAF_9, CAF_10};
-    for (i = 0; i < ann->cascade_activation_functions_count; i++)
-    {
-        ann->cascade_activation_functions[i] =(enum fann_activationfunc_enum)cascade_activation_functions[i];
+    uint8_t cascade_activation_functions[] = {CAF_1, CAF_2, CAF_3, CAF_4, CAF_5, CAF_6, CAF_7, CAF_8, CAF_9, CAF_10};
+    for (i = 0; i < ann->cascade_activation_functions_count; i++) {
+        ann->cascade_activation_functions[i] = (enum fann_activationfunc_enum)cascade_activation_functions[i];
     }
 
     /*
-    * Activation Steepness
-    */
+     * Activation steepness.
+     */
     ann->cascade_activation_steepnesses_count = CASCADE_ACTIVATION_STEEPNESSES_COUNT;
-    /* reallocate mem */
+    // Reallocate memory
     ann->cascade_activation_steepnesses =
-        (fann_type *)realloc(ann->cascade_activation_steepnesses,
+        (fann_type *) realloc(ann->cascade_activation_steepnesses,
         ann->cascade_activation_steepnesses_count * sizeof(fann_type));
 
     uint16_t cascade_activation_steepnesses[] = {CAS_1,CAS_2,CAS_3,CAS_4};
 
-    for (i = 0; i < ann->cascade_activation_steepnesses_count; i++)
-    {
+    for (i = 0; i < ann->cascade_activation_steepnesses_count; i++) {
         ann->cascade_activation_steepnesses[i] = cascade_activation_steepnesses[i];
     }
 
     fann_update_stepwise(ann);
 
-    i=0;
+    i = 0;
 
-    for(layer_it = ann->first_layer; layer_it != ann->last_layer; layer_it++)
-    {
+    for (layer_it = ann->first_layer; layer_it != ann->last_layer; layer_it++) {
         layer_size = layer_size_store[i];
         i++;
-        if(layer_size == 0)
-        {
+        if(layer_size == 0) {
             fann_destroy(ann);
             return NULL;
         }
-        /* we do not allocate room here, but we make sure that
-         * last_neuron - first_neuron is the number of neurons */
+        // We do not allocate room here, but we make sure that
+        // last_neuron - first_neuron is the number of neurons
         layer_it->first_neuron = NULL;
         layer_it->last_neuron = layer_it->first_neuron + layer_size;
         ann->total_neurons += layer_size;
     }
 
-    ann->num_input = (unsigned int)(ann->first_layer->last_neuron - ann->first_layer->first_neuron - 1);
-    ann->num_output = (unsigned int)((ann->last_layer - 1)->last_neuron - (ann->last_layer - 1)->first_neuron);
-    if(ann->network_type == FANN_NETTYPE_LAYER)
-    {
-        /* one too many (bias) in the output layer */
+    ann->num_input = (unsigned int) (ann->first_layer->last_neuron - ann->first_layer->first_neuron - 1);
+    ann->num_output = (unsigned int) ((ann->last_layer - 1)->last_neuron - (ann->last_layer - 1)->first_neuron);
+    if(ann->network_type == FANN_NETTYPE_LAYER) {
+        // one too many (bias) in the output layer
         ann->num_output--;
     }
 
-    /* allocate room for the actual neurons */
+    /* Allocate room for the actual neurons, */
     fann_allocate_neurons(ann);
-    if(ann->errno_f == FANN_E_CANT_ALLOCATE_MEM)
-    {
+    if(ann->errno_f == FANN_E_CANT_ALLOCATE_MEM) {
         fann_destroy(ann);
         return NULL;
     }
-
     
-    i=0;
+    i = 0;
 
     last_neuron = (ann->last_layer - 1)->last_neuron;
-    for(neuron_it = ann->first_layer->first_neuron; neuron_it != last_neuron; neuron_it++)
-    {
+    for (neuron_it = ann->first_layer->first_neuron; neuron_it != last_neuron; neuron_it++) {
         num_connections = neurons[i][0];
         tmpVal = neurons[i][1];
         neuron_it->activation_steepness = neurons[i][2];
@@ -269,8 +263,7 @@ struct fann *fann_create_XOR()
     }
 
     fann_allocate_connections(ann);
-    if(ann->errno_f == FANN_E_CANT_ALLOCATE_MEM)
-    {
+    if(ann->errno_f == FANN_E_CANT_ALLOCATE_MEM) {
         fann_destroy(ann);
         return NULL;
     }
@@ -279,8 +272,7 @@ struct fann *fann_create_XOR()
     weights = ann->weights;
     first_neuron = ann->first_layer->first_neuron;
 
-    for(i = 0; i < ann->total_connections; i++)
-    {
+    for (i = 0; i < ann->total_connections; i++) {
         input_neuron = connections[i][0];
         weights[i] = connections[i][1];
         connected_neurons[i] = first_neuron + input_neuron;

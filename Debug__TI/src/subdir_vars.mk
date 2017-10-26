@@ -2,8 +2,6 @@
 # Automatically-generated file. Do not edit!
 ################################################################################
 
-SHELL = cmd.exe
-
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
 ../src/fann.c \
@@ -30,20 +28,20 @@ OBJS += \
 ./src/fann_train_data.obj 
 
 OBJS__QUOTED += \
-"src\fann.obj" \
-"src\fann_cascade.obj" \
-"src\fann_error.obj" \
-"src\fann_io.obj" \
-"src\fann_train.obj" \
-"src\fann_train_data.obj" 
+"src/fann.obj" \
+"src/fann_cascade.obj" \
+"src/fann_error.obj" \
+"src/fann_io.obj" \
+"src/fann_train.obj" \
+"src/fann_train_data.obj" 
 
 C_DEPS__QUOTED += \
-"src\fann.d" \
-"src\fann_cascade.d" \
-"src\fann_error.d" \
-"src\fann_io.d" \
-"src\fann_train.d" \
-"src\fann_train_data.d" 
+"src/fann.d" \
+"src/fann_cascade.d" \
+"src/fann_error.d" \
+"src/fann_io.d" \
+"src/fann_train.d" \
+"src/fann_train_data.d" 
 
 C_SRCS__QUOTED += \
 "../src/fann.c" \

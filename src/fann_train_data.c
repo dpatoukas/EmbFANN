@@ -12,11 +12,11 @@
 #include <string.h>
 #include <stdint.h>
 
-/*
-************************* Static Implementation*********************************
-*replaces input function with a set of predefined data for the XOR example
-*to be used as template for MSP430 port
-*/
+/**
+ ************************* Static Implementation *******************************
+ * replaces input function with a set of predefined data for the XOR example
+ * to be used as template for MSP430 porting
+ */
 
 /* Read training data for XOR.
  */
@@ -29,10 +29,10 @@ FANN_EXTERNAL struct fann_train_data *FANN_API fann_read_train_from_static()
 }
 
 /* INTERNAL FUNCTION
-*  Read the data for XOR
-*Values can be found on the XOR example folder(.data file)
-*Just replaced file scraping with declarations
-*TODO: Add a header file with all the declaration to increase usability?
+ * Read the data for XOR
+ * Values can be found on the XOR example folder(.data file)
+ * Just replaced file scraping with declarations
+ * TODO: Add a header file with all the declaration to increase usability?
  */
 struct fann_train_data *fann_read_train_XOR()
 {
@@ -76,8 +76,6 @@ struct fann_train_data *fann_read_train_XOR()
         }
     }
     return data;
-
-
 }
 
 /*

@@ -1,3 +1,4 @@
+#define DECIMAL_POINT 		13
 #define NUM_LAYERS		 	3
 #define LEARNING_RATE	 	0.700
 #define CONNECTION_RATE	 	1.00

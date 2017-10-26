@@ -2,9 +2,7 @@
 # Automatically-generated file. Do not edit!
 ################################################################################
 
-SHELL = cmd.exe
-
-CG_TOOL_ROOT := C:/ti/ccsv7/tools/compiler/msp430-gcc-6.2.1.16_win32
+CG_TOOL_ROOT := /Applications/ti/ccsv7/tools/compiler/msp430-gcc-6.2.1.16_osx
 
 GEN_OPTS__FLAG := 
 GEN_CMDS__FLAG := 
@@ -26,8 +24,8 @@ $(GEN_CMDS__FLAG) \
 
 -include ../makefile.init
 
-RM := DEL /F
-RMDIR := RMDIR /S/Q
+RM := rm -rf
+RMDIR := rm -rf
 
 # All of the sources participating in the build are defined here
 -include sources.mk
@@ -151,21 +149,21 @@ all: $(OBJS) $(CMD_SRCS) $(LD_SRCS) $(GEN_CMDS)
 mspFANN.out: $(OBJS) $(CMD_SRCS) $(LD_SRCS) $(GEN_CMDS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: GNU Linker'
-	"C:/ti/ccsv7/tools/compiler/msp430-gcc-6.2.1.16_win32/bin/msp430-elf-gcc.exe" -Os -g -gdwarf-3 -gstrict-dwarf -Wall -mhwmult=f5series -mcode-region=none -mdata-region=none -mlarge -Wl,-Map,"mspFANN.map" -Wl,--gc-sections -L"C:/ti/ccsv7/ccs_base/msp430/include_gcc" -o"mspFANN.out" $(ORDERED_OBJS)
+	"/Applications/ti/ccsv7/tools/compiler/msp430-gcc-6.2.1.16_osx/bin/msp430-elf-gcc" -Os -g -gdwarf-3 -gstrict-dwarf -Wall -mhwmult=f5series -mcode-region=none -mdata-region=none -mlarge -Wl,-Map,"mspFANN.map" -Wl,--gc-sections -L"/Applications/ti/ccsv7/ccs_base/msp430/include_gcc" -o"mspFANN.out" $(ORDERED_OBJS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 
 mspFANN.hex: $(EXE_OUTPUTS)
 	@echo 'Invoking: GNU Objcopy Utility'
-	"C:/ti/ccsv7/tools/compiler/msp430-gcc-6.2.1.16_win32/bin/msp430-elf-objcopy.exe"  $(EXE_OUTPUTS__QUOTED) "mspFANN.hex"
+	"/Applications/ti/ccsv7/tools/compiler/msp430-gcc-6.2.1.16_osx/bin/msp430-elf-objcopy"  $(EXE_OUTPUTS__QUOTED) "mspFANN.hex"
 	@echo 'Finished building: $@'
 	@echo ' '
 
 # Other Targets
 clean:
 	-$(RM) $(BIN_OUTPUTS__QUOTED)$(EXE_OUTPUTS__QUOTED)
-	-$(RM) "main.o" "src\fann.o" "src\fann_cascade.o" "src\fann_error.o" "src\fann_io.o" "src\fann_train.o" "src\fann_train_data.o" 
-	-$(RM) "main.d" "src\fann.d" "src\fann_cascade.d" "src\fann_error.d" "src\fann_io.d" "src\fann_train.d" "src\fann_train_data.d" 
+	-$(RM) "main.o" "src/fann.o" "src/fann_cascade.o" "src/fann_error.o" "src/fann_io.o" "src/fann_train.o" "src/fann_train_data.o" 
+	-$(RM) "main.d" "src/fann.d" "src/fann_cascade.d" "src/fann_error.d" "src/fann_io.d" "src/fann_train.d" "src/fann_train_data.d" 
 	-@echo 'Finished clean'
 	-@echo ' '
 

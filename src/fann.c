@@ -14,8 +14,9 @@
 #include "fann.h"
 
 
-/* INTERNAL FUNCTION
-   Allocates the main structure and sets some default values.
+/**
+ * INTERNAL FUNCTION
+ * Allocates the main structure and sets some default values.
  */
 struct fann *fann_allocate_structure(unsigned int num_layers)
 {
@@ -326,7 +327,7 @@ FANN_EXTERNAL fann_type *FANN_API fann_run(struct fann * ann, fann_type * input)
     struct fann_neuron *first_neuron = ann->first_layer->first_neuron;
 
 #ifdef FIXEDFANN
-    int multiplier = 8192;//ann->multiplier;
+    int multiplier = ann->multiplier; // 8192;
     unsigned int decimal_point = ann->decimal_point;
 
     /* values used for the stepwise linear sigmoid function */
