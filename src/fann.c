@@ -327,7 +327,7 @@ FANN_EXTERNAL fann_type *FANN_API fann_run(struct fann * ann, fann_type * input)
     struct fann_neuron *first_neuron = ann->first_layer->first_neuron;
 
 #ifdef FIXEDFANN
-    int multiplier = ann->multiplier; // 8192;
+    int multiplier = 8192; // ann->multiplier; // 8192;
     unsigned int decimal_point = ann->decimal_point;
 
     /* values used for the stepwise linear sigmoid function */
